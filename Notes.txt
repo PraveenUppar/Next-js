@@ -1,7 +1,42 @@
 Next.js is a React framework for production that provides:
 
+npx create-next-app@latest .
+
 File-based routing (automatic routing)
 Server-side rendering (SSR)
 Static site generation (SSG)
 API routes (build backend in same project)
 Automatic code splitting and optimization
+
+
+File-Based Routing System
+app/
+├── page.tsx              → / (home)
+├── about/
+│   └── page.tsx          → /about
+├── blog/
+│   ├── page.tsx          → /blog
+│   └── [id]/
+│       └── page.tsx      → /blog/1, /blog/2, etc.
+└── layout.tsx            → Shared layout
+
+
+Special Files:
+
+page.tsx - Defines a route
+layout.tsx - Shared UI for a segment
+error.tsx - Error boundary
+loading.tsx - Loading UI 
+not-found.tsx - 404 page
+
+
+
+
+
+
+
+
+
+
+
+
