@@ -1,0 +1,7 @@
+Next.js is a React framework for production that provides:
+
+File-based routing (automatic routing)
+Server-side rendering (SSR)
+Static site generation (SSG)
+API routes (build backend in same project)
+Automatic code splitting and optimization
