@@ -1,4 +1,6 @@
 // app/products/page.tsx
+
+// fetch API now supports caching strategies directly in the options, such as cache: 'force-cache', no-store, or reload, allowing browser-level control.
 async function getProducts() {
   const res = await fetch("https://api.example.com/products", {
     // Don't cache, always fetch fresh
