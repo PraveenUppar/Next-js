@@ -8,6 +8,18 @@ Static site generation (SSG)
 API routes (build backend in same project)
 Automatic code splitting and optimization
 
+Server Components:
+
+Render on the server only
+Cannot use hooks, browser APIs, or event listeners
+Direct database access
+
+Client Components:
+
+Run on browser
+Can use hooks, state, effects
+Can use browser APIs
+
 
 File-Based Routing System
 app/
@@ -30,9 +42,22 @@ loading.tsx - Loading UI
 not-found.tsx - 404 page
 
 
+Client-side rendering (CSR) is a modern technique used in web development where the rendering of a webpage is performed in the browser using JavaScript. 
+Instead of the server sending a fully rendered HTML page to the client
 
+Downsides?
+Not SEO optimised
+User sees a flash before the page renders
+Waterfalling problem
 
+When the rendering process (converting JS components to HTML) happens on the server, it’s called SSR. 
 
+Downsides of SSR?
+Expensive since every request needs to render on the server
+Harder to scale, you can’t cache to CDNs
+
+If a page uses Static Generation, the page HTML is generated at build time. That means in production, the page HTML is generated when you run next build. 
+This HTML will then be reused on each request. It can be cached by a CDN.
 
 
 
