@@ -60,7 +60,8 @@ If a page uses Static Generation, the page HTML is generated at build time. That
 This HTML will then be reused on each request. It can be cached by a CDN.
 
 
-
+Linting
+npm install --save-dev eslint prettier eslint-config-prettier
 
 
 
