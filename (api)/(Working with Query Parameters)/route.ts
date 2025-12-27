@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   if (!query) {
     return Response.json(
       { error: "Query parameter is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 

@@ -15,7 +15,7 @@ export default function Dashboard() {
 // app/dashboard/components/Stats.tsx (Server)
 export async function Stats() {
   const data = await fetch("https://api.example.com/stats").then((res) =>
-    res.json()
+    res.json(),
   );
 
   return (
