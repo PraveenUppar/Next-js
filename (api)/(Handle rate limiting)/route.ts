@@ -10,7 +10,7 @@ const ratelimit = new Ratelimit({
 export async function POST(request: Request) {
   const ip = request.ip;
 
-  const { success, limit, reset, remaining } = await ratelimit.limit(ip);
+  const { success } = await ratelimit.limit(ip);
 
   if (!success) {
     return Response.json({ error: "Rate limit exceeded" }, { status: 429 });
