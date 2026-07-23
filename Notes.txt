@@ -1,68 +1,80 @@
-Next.js is a React framework for production that provides:
+Next.js - Key Concepts
+========================
 
-npx create-next-app@latest .
+What is Next.js?
+Next.js is a React FRAMEWORK (not just a library) built on top of React.
+It adds features that React doesn't have out of the box:
+- Server-Side Rendering (SSR)
+- Static Site Generation (SSG)
+- File-based routing (no React Router needed!)
+- API routes (build backend endpoints inside your Next.js app)
+- Image optimization
+- Font optimization
+- Built-in CSS support
 
-File-based routing (automatic routing)
-Server-side rendering (SSR)
-Static site generation (SSG)
-API routes (build backend in same project)
-Automatic code splitting and optimization
+Next.js vs React:
+- React: A UI LIBRARY — you handle routing, data fetching, and server logic yourself.
+- Next.js: A full FRAMEWORK — handles routing, rendering, optimization, and API out of the box.
 
-Server Components:
+| Feature              | React (Vite/CRA)        | Next.js                    |
+|----------------------|-------------------------|----------------------------|
+| Routing              | Need react-router-dom   | File-based (automatic)     |
+| Rendering            | Client-side only (CSR)  | SSR, SSG, CSR, ISR         |
+| API Routes           | Need separate backend   | Built-in (/api/...)        |
+| Image Optimization   | Manual                  | Built-in (next/image)      |
+| SEO                  | Poor (CSR)              | Excellent (SSR/SSG)        |
+| Deployment           | Static hosting          | Vercel, any Node server    |
 
-Render on the server only
-Cannot use hooks, browser APIs, or event listeners
-Direct database access
+Rendering Strategies:
+1. CSR (Client-Side Rendering): Browser downloads empty HTML → JavaScript renders the UI.
+   - Used in plain React apps (Vite, CRA).
+   - Bad for SEO (search engines see empty page initially).
 
-Client Components:
+2. SSR (Server-Side Rendering): Server renders HTML on EVERY request → sends full HTML.
+   - Page is ready when it reaches the browser.
+   - Good for SEO, good for dynamic data (user-specific content).
 
-Run on browser
-Can use hooks, state, effects
-Can use browser APIs
+3. SSG (Static Site Generation): HTML is generated at BUILD TIME → served as static files.
+   - Fastest — pages are pre-built.
+   - Good for blogs, docs, marketing pages (content doesn't change often).
 
+4. ISR (Incremental Static Regeneration): SSG + revalidation.
+   - Pages are static but get re-generated after a set time (e.g., every 60 seconds).
+   - Best of both worlds — fast AND up-to-date.
 
-File-Based Routing System
-app/
-├── page.tsx              → / (home)
-├── about/
-│   └── page.tsx          → /about
-├── blog/
-│   ├── page.tsx          → /blog
-│   └── [id]/
-│       └── page.tsx      → /blog/1, /blog/2, etc.
-└── layout.tsx            → Shared layout
+App Router vs Pages Router:
+- Pages Router (older): Uses /pages directory. Each file = a route. Uses getServerSideProps, getStaticProps.
+- App Router (newer, recommended): Uses /app directory. Server Components by default. Uses async components for data fetching.
+- Next.js 13+ uses App Router by default.
 
+Server Components vs Client Components:
+- Server Components (default): Render on the server, don't ship JavaScript to the browser.
+  - Can directly access databases, file system, APIs.
+  - Cannot use hooks (useState, useEffect) or event handlers (onClick).
+- Client Components ("use client"): Render in the browser, include JavaScript.
+  - Can use hooks, event handlers, browser APIs.
+  - Must add "use client" directive at the top of the file.
 
-Special Files:
+Project Structure (App Router):
+  app/
+    layout.jsx      — Root layout (wraps all pages)
+    page.jsx        — Home page (/)
+    loading.jsx     — Loading UI
+    error.jsx       — Error UI
+    not-found.jsx   — 404 page
+    about/
+      page.jsx      — About page (/about)
+    blog/
+      page.jsx      — Blog listing (/blog)
+      [slug]/
+        page.jsx    — Dynamic blog post (/blog/my-post)
+    api/
+      users/
+        route.js    — API endpoint (GET/POST /api/users)
+  public/           — Static files (images, fonts)
+  next.config.js    — Next.js configuration
 
-page.tsx - Defines a route
-layout.tsx - Shared UI for a segment
-error.tsx - Error boundary
-loading.tsx - Loading UI 
-not-found.tsx - 404 page
-
-
-Client-side rendering (CSR) is a modern technique used in web development where the rendering of a webpage is performed in the browser using JavaScript. 
-Instead of the server sending a fully rendered HTML page to the client
-
-Downsides?
-Not SEO optimised
-User sees a flash before the page renders
-Waterfalling problem
-
-When the rendering process (converting JS components to HTML) happens on the server, it’s called SSR. 
-
-Downsides of SSR?
-Expensive since every request needs to render on the server
-Harder to scale, you can’t cache to CDNs
-
-If a page uses Static Generation, the page HTML is generated at build time. That means in production, the page HTML is generated when you run next build. 
-This HTML will then be reused on each request. It can be cached by a CDN.
-
-
-Linting
-npm install --save-dev eslint prettier eslint-config-prettier
-
-
-
-
+Creating a Next.js Project:
+  npx create-next-app@latest my-app
+  cd my-app
+  npm run dev
